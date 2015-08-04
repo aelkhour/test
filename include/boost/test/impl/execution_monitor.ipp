@@ -184,7 +184,7 @@ namespace { void _set_se_translator( void* ) {} }
 #include <errno.h>
 #endif
 
-#if defined(__GNUC__) && !defined(BOOST_NO_TYPEID)
+#if (defined(__GLIBCXX__) || defined(__GLIBCPP__)) && !defined(BOOST_NO_TYPEID)
 #  include <cxxabi.h>
 #endif
 
@@ -316,7 +316,7 @@ template<typename T>
 char const*
 typeid_name( T const& t )
 {
-#ifdef __GNUC__
+#if defined(__GLIBCXX__) || defined(__GLIBCPP__)
     int status;
 
     return abi::__cxa_demangle( typeid(t).name(), 0, 0, &status );
